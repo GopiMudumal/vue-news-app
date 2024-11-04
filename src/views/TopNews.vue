@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="top-news">
     <NewsContainer />
   </div>
 </template>
@@ -12,11 +12,11 @@ const store = useStore();
 const loading = computed(() => store.getters.loading);
 
 const fetchFilteredNews = async () => {
-  await store.dispatch("fetchFilteredNews");
+  await store.dispatch("fetchQueryFilteredNews");
 };
 
 const loadMoreArticles = async () => {
-  await store.dispatch("loadMoreArticles");
+  await store.dispatch("loadMoreArticles", { endpoint: "top-headlines" });
 };
 
 const handleScroll = () => {

@@ -1,6 +1,6 @@
 <template>
   <div class="news-details">
-    <NewsItem :article="article" />
+    <NewsItem :article="article" showInfo="true" />
     <router-link to="/">Back to News List</router-link>
   </div>
 </template>
@@ -17,11 +17,14 @@ const article = ref({});
 
 onMounted(() => {
   const articleId = route.params.id;
-  article.value = store.getters.getArticleById(articleId);
+  if (articleId) {
+    article.value = store.getters.getArticleById(articleId);
+  }
+  store.commit("SET_SHOW_FILTER", false);
 });
 </script>
 
-<style>
+<style scoped>
 .news-details {
   width: 100%;
   display: flex;
@@ -31,5 +34,12 @@ onMounted(() => {
   gap: 30px;
   padding: 10px;
   box-sizing: border-box;
+  margin-top: 140px;
+}
+
+@media only screen and (max-width: 380px) {
+  .news-details {
+    margin-top: 320px;
+  }
 }
 </style>

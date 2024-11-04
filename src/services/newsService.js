@@ -1,10 +1,16 @@
+import { PAGE_SIZE } from "@/constants/constants";
 import axios from "axios";
 
 const apiKey = process.env.VUE_APP_NEWS_API_KEY;
 
-export const fetchNews = async (query, country, category, page = 1) => {
-  console.log({ query, country, category, page });
-  const url = `https://newsapi.org/v2/top-headlines?q=${query}&pageSize=10&apikey=${apiKey}&page=${page}${
+export const fetchNews = async (
+  endpoint,
+  query,
+  country,
+  category,
+  page = 1
+) => {
+  const url = `https://newsapi.org/v2/${endpoint}?q=${query}&pageSize=${PAGE_SIZE}&apikey=${apiKey}&page=${page}${
     country ? `&country=${country}` : ""
   }${category ? `&category=${category}` : ""}`;
 
